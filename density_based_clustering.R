@@ -5,10 +5,21 @@ install.packages("factoextra")
 library("fpc")
 library("dbscan")
 library("factoextra")
+library(tidyverse)
+library(cluster)  
+library(factoextra)
+library(purrr)
+
 # Load the data 
 data("multishapes", package = "factoextra")
 df <- multishapes[, 1:2]
 
+# Applying K-Means to non convex problem
+k2 <- kmeans(df, centers = 4, nstart = 25)
+str(k2)
+fviz_cluster(k2, data = df)
+
+# Applying DBSCAN
 # Compute DBSCAN using fpc package
 library("fpc")
 set.seed(123)
